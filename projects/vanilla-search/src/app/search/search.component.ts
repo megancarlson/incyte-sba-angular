@@ -17,8 +17,7 @@ import { Observable, Subscription, filter, tap } from 'rxjs';
 import { IncyteResult } from '@sinequa/vanilla/app/no-acl-check/incyte.types';
 
 import { FACETS, FEATURES, FacetParams, METADATA_CONFIG, PREVIEW_HIGHLIGHTS } from '../../config';
-import { INCYTE_FACETS_ALL, INCYTE_FACETS_FILESHARES, INCYTE_FACETS_CHEMCART, INCYTE_FACETS_PSILO, INCYTE_FACETS_BENCHLING, INCYTE_FACETS_OTHER} from '../../config';
-import { INCYTE_CHEMCART_METADATA_CONFIG, INCYTE_BENCHLING_METADATA_CONFIG, INCYTE_PSILO_METADATA_CONFIG, INCYTE_FILESHARES_METADATA_CONFIG } from '../../config';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -170,22 +169,25 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public get incyteFacetsAll(): FacetConfig<FacetParams>[] {
-    return this.appService.app?.data?.facetsAll as any as FacetConfig<FacetParams>[] || INCYTE_FACETS_ALL;
+    return this.appService.app?.data?.facetsAll as any as FacetConfig<FacetParams>[];
   }
   public get incyteFacetsFileshares(): FacetConfig<FacetParams>[] {
-    return this.appService.app?.data?.facetsFileShares as any as FacetConfig<FacetParams>[] || INCYTE_FACETS_FILESHARES;
+    return this.appService.app?.data?.facetsFileShares as any as FacetConfig<FacetParams>[];
   }
   public get incyteFacetsChemcart(): FacetConfig<FacetParams>[] {
-    return this.appService.app?.data?.facetsChemcart as any as FacetConfig<FacetParams>[] || INCYTE_FACETS_CHEMCART;
+    return this.appService.app?.data?.facetsChemcart as any as FacetConfig<FacetParams>[];
   }
   public get incyteFacetsBenchling(): FacetConfig<FacetParams>[] {
-    return this.appService.app?.data?.facetsBenchling as any as FacetConfig<FacetParams>[] || INCYTE_FACETS_BENCHLING;
+    return this.appService.app?.data?.facetsBenchling as any as FacetConfig<FacetParams>[];
   }
   public get incyteFacetsPSILO(): FacetConfig<FacetParams>[] {
-    return this.appService.app?.data?.facetsPSILO as any as FacetConfig<FacetParams>[] || INCYTE_FACETS_PSILO;
+    return this.appService.app?.data?.facetsPSILO as any as FacetConfig<FacetParams>[];
   }
-  public get incyteFacetsOther(): FacetConfig<FacetParams>[] {
-    return this.appService.app?.data?.facetsOthers as any as FacetConfig<FacetParams>[] || INCYTE_FACETS_OTHER;
+  public get otherFacetsAll(): FacetConfig<FacetParams>[] {
+    return this.appService.app?.data?.otherFacetsAll as any as FacetConfig<FacetParams>[];
+  }
+  public get otherFacetsBuckets(): FacetConfig<FacetParams>[] {
+    return this.appService.app?.data?.otherFacetsBuckets as any as FacetConfig<FacetParams>[];
   }
 
    /**
@@ -198,19 +200,19 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public get incyteChemCartMetadata(): MetadataConfig[] {
-    return this.appService.app?.data?.metadataChemcart as any as MetadataConfig[] || INCYTE_CHEMCART_METADATA_CONFIG;
+    return this.appService.app?.data?.metadataChemcart as any as MetadataConfig[];
   }
 
   public get incyteBenchlingMetadata(): MetadataConfig[] {
-    return this.appService.app?.data?.metadataBenchling as any as MetadataConfig[] || INCYTE_BENCHLING_METADATA_CONFIG;
+    return this.appService.app?.data?.metadataBenchling as any as MetadataConfig[];
   }
 
   public get incytePSILOMetadata(): MetadataConfig[] {
-    return this.appService.app?.data?.metadataPSILO as any as MetadataConfig[] || INCYTE_PSILO_METADATA_CONFIG;
+    return this.appService.app?.data?.metadataPSILO as any as MetadataConfig[];
   }
 
   public get incyteFileSharesMetadata(): MetadataConfig[] {
-    return this.appService.app?.data?.metadataFileShares as any as MetadataConfig[] || INCYTE_FILESHARES_METADATA_CONFIG;
+    return this.appService.app?.data?.metadataFileShares as any as MetadataConfig[];
   }
 
   protected get currentSelectedTab(): string {

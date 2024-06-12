@@ -69,7 +69,8 @@
             <!-- Other filters -->
             <sq-facet-card  
                 [collapsible]="true"
-                class="mb-3" >
+                class="mb-3" 
+                *ngIf="['all', 'fileshares', 'chemcart', 'benchling', 'psilo'].includes(currentSelectedTab)">
                 <sq-facet-multi #facet
                     title="Incyte Filters" 
                     [icon]="'fas fa-microscope'"
@@ -115,13 +116,22 @@
             <sq-facet-card  
                 [collapsible]="true"
                 class="mb-3" 
-                *ngIf="['all', 'fileshares', 'chemcart', 'benchling'].includes(currentSelectedTab)">
+                *ngIf="['all', 'fileshares', 'chemcart', 'benchling', 'buckets'].includes(currentSelectedTab)">
                 <sq-facet-multi #facet
                     title="Filters" 
                     [icon]="'fas fa-microscope'"
                     [results]="results"
-                    [facets]="incyteFacetsOther"
-                    [facetComponents]="facetComponents">
+                    [facets]="otherFacetsAll"
+                    [facetComponents]="facetComponents"
+                    *ngIf="['all', 'fileshares', 'chemcart', 'benchling'].includes(currentSelectedTab)">
+                </sq-facet-multi>
+                <sq-facet-multi #facet
+                    title="Filters" 
+                    [icon]="'fas fa-microscope'"
+                    [results]="results"
+                    [facets]="otherFacetsBuckets"
+                    [facetComponents]="facetComponents"
+                    *ngIf="['buckets'].includes(currentSelectedTab)">
                 </sq-facet-multi>
             </sq-facet-card>
 
