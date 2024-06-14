@@ -54,6 +54,7 @@ import { HELP_DEFAULT_FOLDER_OPTIONS } from "../config";
 import { NoAccessResults } from "./no-acl-check/no-access-results";
 import { ImageListComponent } from "./image/image-list.component";
 import { ImageTileComponent } from "./image/image-tile.component";
+import { PreviewCompoundComponent } from "./preview-compound/preview-compound.component";
 
 // Initialization of @sinequa/core
 export const startConfig: StartConfig = {
@@ -158,7 +159,8 @@ export const breakpoints = {
         AutocompleteComponent,
         NoAccessResults,
         ImageListComponent,
-        ImageTileComponent
+        ImageTileComponent,
+        PreviewCompoundComponent
     ],
     providers: [
         // Provides an APP_INITIALIZER which will fetch application configuration information from the Sinequa

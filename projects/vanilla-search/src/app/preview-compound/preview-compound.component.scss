@@ -1,0 +1,21 @@
+.overview {
+    overflow: auto;
+}
+
+section {
+    padding: 1.5rem;
+
+    &+section {
+        padding-top: 0;
+    }
+
+    .section-title {
+        font-size: 14px;
+        font-weight:700;
+    }
+
+    .project{
+        font-size: 12px;
+        font-weight: 400;
+    }
+}

@@ -354,7 +354,8 @@
                 </ng-template>
 
                 <ng-template [sqFacetView]="{text: 'msg#preview.viewPreview'}">
-                    <sq-preview #facet
+                    <preview-compound [record]="openedDoc"></preview-compound>
+                    <!-- <sq-preview #facet
                         style="height: calc(100vh - 300px);"
                         [id]="openedDoc.id"
                         [highlightColors]="previewHighlights"
@@ -362,7 +363,7 @@
                         [preferenceName]="'mini-preview'"
                         [scale]="0.8"
                         (ready)="onPreviewReady(facet)">
-                    </sq-preview>
+                    </sq-preview> -->
                 </ng-template>
 
                 <ng-template [sqFacetView]="{text: 'msg#preview.viewDuplicates'}" *ngIf="openedDoc.groupcount && openedDoc.groupcount > 1">

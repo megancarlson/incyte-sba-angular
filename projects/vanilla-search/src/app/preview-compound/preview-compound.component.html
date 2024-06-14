@@ -1,0 +1,43 @@
+<div class="overflow-auto" style="height: calc(100% - 152px);">
+    <div class="overview">
+        <section>
+            <sq-metadata-item [record]="record" field="projectMetadata" label="Project"></sq-metadata-item>
+            <br>
+            <div class="link" *ngIf="url">
+                <a [href]="url" target="_blank">Explore in PSILO</a>
+            </div>
+        </section>
+
+        <section *ngIf="meetingMinutes.records && meetingMinutes.records.length">
+            <header class="d-flex justify-content-between align-items-baseline">
+                <h5 class="section-title flex-grow-1">
+                    <span>Meeting minutes mentioning {{ title }}</span>
+                </h5>
+            </header>
+            <ul class="meeting-minutes">
+                <li *ngFor="let record of meetingMinutes.records">
+                    {{ record.title }}
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+
+
+<!-- <div *ngIf="meetingMinutes">
+    <h3>Meeting minutes mentioning {{ title }}</h3>
+    <ul>
+        <li *ngFor="let record of meetingMinutes.records">
+            {{ record.title }}
+        </li>
+    </ul>
+</div>
+<div *ngIf="experiments">
+    <h3>Experiments mentioning {{ title }}</h3>
+    <ul>
+        <li *ngFor="let record of experiments.records">
+            {{ record.title }}
+        </li>
+    </ul>
+</div> -->
