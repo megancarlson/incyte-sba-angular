@@ -4,18 +4,49 @@
 
 section {
     padding: 1.5rem;
+}
 
-    &+section {
-        padding-top: 0;
-    }
+.section-title {
+    font-size: 14px;
+    font-weight:700;
+}
 
-    .section-title {
-        font-size: 14px;
-        font-weight:700;
-    }
+.project {
+    font-size: 12px;
+    font-weight: 400;
+}
 
-    .project{
-        font-size: 12px;
-        font-weight: 400;
-    }
+.list-meeting-minutes {
+    display: grid;
+
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+}
+
+.meeting-minute-container{
+    cursor: pointer;
+}
+
+.meeting-minutes {
+    display: flex;
+    row-gap: 0.5rem;
+    padding: 0.5rem;
+
+    align-items: center;
+}
+
+.meeting-minutes:hover {
+    background-color: antiquewhite;
+}
+
+.card-title {
+    margin: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    line-height: 2;
 }

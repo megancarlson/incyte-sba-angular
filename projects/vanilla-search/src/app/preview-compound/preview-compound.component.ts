@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/cor
 import { Record } from "@sinequa/core/web-services";
 import { SearchService } from '@sinequa/components/search';
 import { Filter } from "@sinequa/core/web-services";
+import { PreviewService } from "@sinequa/components/preview";
+import { AppService } from "@sinequa/core/app-utils";
 
 @Component({
     selector: "preview-compound",
@@ -19,7 +21,9 @@ export class PreviewCompoundComponent implements OnInit, OnChanges{
     public experiments: any;
 
     constructor(
-        public searchService: SearchService
+        public searchService: SearchService,
+        private previewService: PreviewService,
+        public appService: AppService
       ) {}
 
     ngOnInit()
@@ -37,6 +41,7 @@ export class PreviewCompoundComponent implements OnInit, OnChanges{
         const queryForMeetingMinutes = this.searchService.makeQuery();
         queryForMeetingMinutes.name = "iris_query";
         queryForMeetingMinutes.text = "meeting minutes"
+        queryForMeetingMinutes.pageSize = 10;
 
         queryForMeetingMinutes.addFilter(filterCompound);
 
@@ -56,4 +61,12 @@ export class PreviewCompoundComponent implements OnInit, OnChanges{
             this.experiments = results;
         })        
     }
+
+    protected openFullViewDocument(record:Record): void {
+        this.previewService.openRoute(record, this.searchService.query);
+    }
+
+    get formatIcons(): any {
+        return this.appService.app?.data?.formatIcons;
+      }
 }
