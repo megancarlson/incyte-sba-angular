@@ -39,7 +39,7 @@ export class PreviewCompoundComponent implements OnInit, OnChanges{
 
         //Retrieve meeting minutes mentioning this compound
         const queryForMeetingMinutes = this.searchService.makeQuery();
-        queryForMeetingMinutes.name = "iris_query";
+        queryForMeetingMinutes.name = "iris_query_test";
         queryForMeetingMinutes.text = "meeting minutes"
         queryForMeetingMinutes.pageSize = 10;
 
@@ -51,7 +51,7 @@ export class PreviewCompoundComponent implements OnInit, OnChanges{
 
         //Retrieve experiments mentioning this compound
         const queryForExperiments = this.searchService.makeQuery();
-        queryForExperiments.name = "iris_query";
+        queryForExperiments.name = "iris_query_test";
 
         let filterSource: Filter = { operator: "or", filters: [{field: "collection", value: "/Databases/ChemCart/" }, {field: "collection", value: "/API/Benchling/" }]};
         queryForExperiments.addFilter(filterCompound);
