@@ -10,6 +10,7 @@ import { AppService } from '@sinequa/core/app-utils';
 import { FEATURES, SELECTORS_HIGHLIGHTS } from '../config';
 import { HighlightService } from "@sinequa/components/metadata";
 import { PreviewHighlightColors } from "@sinequa/components/preview";
+import { QueryIntentService } from "./query-intent.service";
 
 @Component({
     selector: "app",
@@ -32,7 +33,8 @@ export class AppComponent extends ComponentWithLogin {
         _recentQueriesService: RecentQueriesService,
         _RecentDocumentsService: RecentDocumentsService,
         public selectionService: SelectionService,
-        public appService: AppService
+        public appService: AppService,
+        public queryIntentService: QueryIntentService
     ){
         super();
     }

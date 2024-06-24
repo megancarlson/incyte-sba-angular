@@ -1,8 +1,11 @@
-import { Component, Input, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild, OnInit } from "@angular/core";
 import { SearchService } from "@sinequa/components/search";
 import { Query } from "@sinequa/core/app-utils";
 import { SearchFormComponent } from "@sinequa/components/search-form";
 import { HelpFolderOptions } from "@sinequa/components/user-settings";
+import { QueryIntentService } from "../query-intent.service";
+import { Observable } from "rxjs";
+import { filter } from "rxjs/operators";
 
 @Component({
   selector: 'app-search-form',
@@ -27,7 +30,7 @@ import { HelpFolderOptions } from "@sinequa/components/user-settings";
   }
   `],
 })
-export class AppSearchFormComponent {
+export class AppSearchFormComponent implements OnInit{
 
   /** List of autocomplete sources displayed by the autocomplete */
   @Input() autocompleteSources?: string[];
@@ -41,9 +44,25 @@ export class AppSearchFormComponent {
     indexFile: 'olh-search.html#search',
   }
 
+  public disableNeuralResults$: Observable<boolean>;
+
   constructor(
-    public searchService: SearchService
+    public searchService: SearchService,
+    public queryIntentService: QueryIntentService
   ) {}
+
+  ngOnInit(): void {
+    this.disableNeuralResults$ = this.queryIntentService.disableNeuralQI.asObservable();
+
+    this.disableNeuralResults$.pipe(
+      filter(result => result === true)
+    ).subscribe(() => {
+      if(this.searchForm.neuralSearch)
+      {
+        this.searchForm.toggleNeuralSearch();
+      }
+    });
+  }
 
   onAutocompleteSearch(text: string, query: Query) {
     query.text = text;

@@ -79,7 +79,8 @@ export const routes: Routes = [
 // Search options (search service)
 export const searchOptions: SearchOptions = {
     routes: ["search"],
-    homeRoute: "home"
+    homeRoute: "home",
+    queryIntentsSync: true
 };
 
 
