@@ -21,24 +21,25 @@ export class QueryIntentService {
                 if(incyteQueryIntent)
                 {
                     // Option #1 - Disable neural search
-                    // if (this.processedIntents.indexOf('code' + this.searchService.query.text) < 0) 
-                    // {
-                    //     this.resetProcessedIntents();
-                    //     this.disableNeuralQI.next(true);
-                    //     this.processedIntents.push('code' + this.searchService.query.text);
-                    // }
+                    if (this.processedIntents.indexOf('code' + this.searchService.query.text) < 0) 
+                    {
+                        this.resetProcessedIntents();
+                        this.searchService.query.neuralSearch = false;
+                        this.disableNeuralQI.next(true);
+                        this.processedIntents.push('code' + this.searchService.query.text);
+                    }
                     
                     //Option #2 - Add search operators to filter passages
-                    if(this.searchService.query.text != null && this.searchService.query.text?.indexOf("+") === -1)
-                    {
-                        event.intents.forEach(intent => {
-                            intent.globalEntities?.forEach(entity => {
-                                this.searchService.query.text = this.searchService.query.text?.replace(entity["surface"], "+(" + entity["surface"] + ")");
+                    // if(this.searchService.query.text != null && this.searchService.query.text?.indexOf("+") === -1)
+                    // {
+                    //     event.intents.forEach(intent => {
+                    //         intent.globalEntities?.forEach(entity => {
+                    //             this.searchService.query.text = this.searchService.query.text?.replace(entity["surface"], "+(" + entity["surface"] + ")");
 
-                            })
-                        })
-                        this.searchService.search();
-                    }
+                    //         })
+                    //     })
+                    //     this.searchService.search();
+                    // }
                 }
                 else
                 {
