@@ -52,6 +52,7 @@ export class AppSearchFormComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    //Event triggered by query intent
     this.disableNeuralResults$ = this.queryIntentService.disableNeuralQI.asObservable();
 
     this.disableNeuralResults$.pipe(
