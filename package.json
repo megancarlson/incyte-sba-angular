@@ -90,7 +90,12 @@
     "vis-timeline": "7.7.0",
     "vis-util": "5.0.3",
     "xss": "^1.0.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@sinequa/assistant": "3.2.3",
+    "remark-gfm": "^3.0.1",
+    "safecolor": "1.0.1",
+    "prismjs": "^1.29.0",
+    "prismjs-components-importer": "^0.2.0"
   },
   "overrides": {
     "autoprefixer": "10.4.5"

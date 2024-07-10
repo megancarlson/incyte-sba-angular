@@ -12,11 +12,13 @@ import { UIService } from '@sinequa/components/utils';
 import { AppService } from '@sinequa/core/app-utils';
 import { IntlService } from '@sinequa/core/intl';
 import { LoginService } from '@sinequa/core/login';
-import { AuditEventType, AuditWebService, Filter, Record } from '@sinequa/core/web-services';
+import { AuditEventType, AuditWebService, Filter, Record, PrincipalWebService, CustomHighlights } from '@sinequa/core/web-services';
 import { Observable, Subscription, filter, tap } from 'rxjs';
 import { IncyteResult } from '@sinequa/vanilla/app/no-acl-check/incyte.types';
 
 import { FACETS, FEATURES, FacetParams, METADATA_CONFIG, PREVIEW_HIGHLIGHTS } from '../../config';
+
+import { ChatConfig, ChatContextAttachment } from '@sinequa/assistant/chat';
 
 @Component({
   selector: 'app-search',
@@ -30,6 +32,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   public openedDoc?: Record;
   public preview?: Preview;
   public passageId?: number;
+
+  //variables for the assistant
+  public snippetId?: number;
+  public customHighlights?: CustomHighlights[];
+  public chatSettingsAction: Action;
+  enableSettings = false;
 
   // Custom action for the preview facet (open the preview route)
   public previewCustomActions: Action[];
@@ -79,6 +87,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     public selectionService: SelectionService,
     public loginService: LoginService,
     public auditService: AuditWebService,
+    private principalService: PrincipalWebService
   ) 
   {
 
@@ -115,6 +124,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     }));
 
     this.subscription.add(this.ui.isDarkTheme$.subscribe(value => this.isDark = value))
+
+    this.chatSettingsAction = new Action({
+      icon: 'fas fa-cog',
+      title: 'Settings',
+      action: action => {
+        action.selected = !action.selected;
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -243,17 +260,19 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  openMiniPreview(record: Record, passageId?: number) {
+  openMiniPreview(record: Record, passageId?: number, customHighlights?: CustomHighlights[], snippetId?: number) {
 
     this.passageId = passageId;
+    this.snippetId = snippetId;
+    this.customHighlights = customHighlights;
 
-    if(this.openedDoc !== record) {
+    if (this.openedDoc !== record) {
       this.preview = undefined;
       this.openedDoc = record;
     }
     else {
       // Select the passage in the already open preview
-      this.selectPassage();
+      this.selectPassageOrSnippet();
     }
 
     if (this.ui.screenSizeIsLessOrEqual('md')) {
@@ -377,5 +396,34 @@ export class SearchComponent implements OnInit, OnDestroy {
     {
       this.ui.copyToClipboard((record as any).filePath as string);
     }
+  }
+
+  openMiniPreviewWithChunks(ref: ChatContextAttachment) {
+    this.openMiniPreview(ref.record, undefined,  [{
+      category: "snippet",
+      highlights: ref.parts,
+    }], ref.$partId! - 1);
+  }
+
+  selectPassageOrSnippet() {
+    if (this.preview) {
+      if (this.passageId !== undefined) {
+        const passage = this.preview.data?.record.matchingpassages?.passages.find(p => p.id === this.passageId);
+        if(passage) {
+          this.preview.selectStart("matchingpassages", passage.rlocation[0]);
+        }
+      }
+      else if (this.snippetId !== undefined) {
+        this.preview.select(`snippet_${this.snippetId}`);
+      }
+    }
+  }
+
+  toggleChatSettings(value: boolean) {
+    this.chatSettingsAction.selected = value;
+  }
+
+  onChatConfig(config: ChatConfig) {
+    this.enableSettings = this.principalService.principal!.isAdministrator || config.uiSettings.display;
   }
 }

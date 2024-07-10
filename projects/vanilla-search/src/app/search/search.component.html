@@ -176,7 +176,7 @@
                 </div>
 
                 <!-- nth top passages, if any -->
-                <sq-facet-card class="w-100 mb-2"
+                <!-- <sq-facet-card class="w-100 mb-2"
                     [title]="'msg#machine-learning.passages'"
                     [preference]="'top-passages'"
                     icon="fas fa-brain primary-icon"
@@ -186,7 +186,7 @@
                         (passageClicked)="openMiniPreview($event.$record, $event.id)"
                         (documentOpened)="openPreviewIfNoUrl($event, false)">
                     </sq-top-passages>
-                </sq-facet-card>
+                </sq-facet-card> -->
 
                 <sq-facet-card 
                     *ngIf="results.nonAclRecords && results.nonAclRecords.length > 0"
@@ -197,6 +197,26 @@
                     <no-access-results #facet 
                         [nonAclRecords]="results.nonAclRecords">
                     </no-access-results>
+                </sq-facet-card>
+
+                <sq-facet-card class="w-100 mb-2"
+                    [title]="'Assistant'"
+                    [preference]="'assistant'"
+                    icon="fas fa-comments primary-icon"
+                    [actions]="enableSettings ? [chatSettingsAction] : []">
+                    <sq-chat-v3 #sqChat
+                        [hidden]="chatSettingsAction.selected"
+                        [instanceId]="'search-results-assistant'"
+                        [query]="searchService.query"
+                        class="sq-chat"
+                        (config)="onChatConfig($event)"
+                        (openPreview)="openMiniPreviewWithChunks($event)">
+                    </sq-chat-v3>
+                    <sq-chat-settings-v3 *ngIf="chatSettingsAction.selected"
+                        [instanceId]="'search-results-assistant'"
+                        (update)="toggleChatSettings(false)"
+                        (cancel)="toggleChatSettings(false)">
+                    </sq-chat-settings-v3>
                 </sq-facet-card>
                 
 

@@ -44,6 +44,8 @@ import { PreviewComponent } from './preview/preview.component';
 import { AppSearchFormComponent } from "./search-form/search-form.component";
 import { AutocompleteComponent } from "./search-form/autocomplete.component";
 
+import { ChatComponent, ChatSettingsV3Component } from "@sinequa/assistant/chat";
+
 // Environment
 import { environment } from "../environments/environment";
 
@@ -146,7 +148,9 @@ export const breakpoints = {
         MLModule,
         FiltersModule,
         SearchFormComponent,
-        SimilarDocumentsComponent
+        SimilarDocumentsComponent,
+        ChatComponent,
+        ChatSettingsV3Component
     ],
     declarations: [
         AppComponent,
