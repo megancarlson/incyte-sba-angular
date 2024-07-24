@@ -54,6 +54,7 @@ import { HELP_DEFAULT_FOLDER_OPTIONS } from "../config";
 
 //Incyte
 import { NoAccessResults } from "./no-acl-check/no-access-results";
+import { ChatButtonComponent } from "./chat-button/chat-button.component";
 
 // Initialization of @sinequa/core
 export const startConfig: StartConfig = {
@@ -159,7 +160,8 @@ export const breakpoints = {
         PreviewComponent,
         AppSearchFormComponent,
         AutocompleteComponent,
-        NoAccessResults
+        NoAccessResults,
+        ChatButtonComponent
     ],
     providers: [
         // Provides an APP_INITIALIZER which will fetch application configuration information from the Sinequa

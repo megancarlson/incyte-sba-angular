@@ -31,6 +31,7 @@
                 </ng-container>
                 <sq-user-menu [display]="'fullName'"></sq-user-menu>
                 <sq-help-button [style]="'primary'"  class="ms-1 d-none d-md-block"></sq-help-button>
+                <chat-button [style]="'primary'"  class="chat-button ms-1 d-none d-md-block"></chat-button>
                 <!-- Non mobile feedback button -->
                 <sq-feedback-menu [style]="'primary'" [rightAligned]="true" class="ms-1 d-none d-md-block" *ngIf="loginService.complete"></sq-feedback-menu>
             </ul>
@@ -200,9 +201,9 @@
                 </sq-facet-card>
 
                 <sq-facet-card class="w-100 mb-2"
-                    [title]="'Assistant'"
+                    [title]="'AI-Powered Summary'"
                     [preference]="'assistant'"
-                    icon="fas fa-comments primary-icon"
+                    icon="fas fa-wand-sparkles primary-icon"
                     [actions]="enableSettings ? [chatSettingsAction] : []">
                     <sq-chat-v3 #sqChat
                         [hidden]="chatSettingsAction.selected"
@@ -219,7 +220,6 @@
                     </sq-chat-settings-v3>
                 </sq-facet-card>
                 
-
                 <!-- Result counter and sort -->
                 <sq-results-counter [rowCount]="searchService.rowCount" class="small my-2 ms-auto px-2"></sq-results-counter>
                 <sq-sort-selector [results]="results" [rightAligned]="true" class="small my-2"></sq-sort-selector>
