@@ -200,6 +200,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   public get incyteFacetsPSILO(): FacetConfig<FacetParams>[] {
     return this.appService.app?.data?.facetsPSILO as any as FacetConfig<FacetParams>[];
   }
+  public get incyteFacetsVeeva(): FacetConfig<FacetParams>[] {
+    return this.appService.app?.data?.facetsVeeva as any as FacetConfig<FacetParams>[];
+  }
   public get otherFacetsAll(): FacetConfig<FacetParams>[] {
     return this.appService.app?.data?.otherFacetsAll as any as FacetConfig<FacetParams>[];
   }
@@ -230,6 +233,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   public get incyteFileSharesMetadata(): MetadataConfig[] {
     return this.appService.app?.data?.metadataFileShares as any as MetadataConfig[];
+  }
+
+  public get incyteVeevaMetadata(): MetadataConfig[] {
+    return this.appService.app?.data?.metadataVeeva as any as MetadataConfig[];
   }
 
   protected get currentSelectedTab(): string {

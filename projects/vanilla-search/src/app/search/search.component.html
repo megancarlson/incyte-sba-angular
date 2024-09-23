@@ -71,7 +71,7 @@
             <sq-facet-card  
                 [collapsible]="true"
                 class="mb-3" 
-                *ngIf="['all', 'fileshares', 'chemcart', 'benchling', 'psilo'].includes(currentSelectedTab)">
+                *ngIf="['all', 'fileshares', 'chemcart', 'benchling', 'psilo', 'veeva'].includes(currentSelectedTab)">
                 <sq-facet-multi #facet
                     title="Incyte Filters" 
                     [icon]="'fas fa-microscope'"
@@ -111,6 +111,14 @@
                     [facets]="incyteFacetsPSILO"
                     [facetComponents]="facetComponents"
                     *ngIf="['psilo'].includes(currentSelectedTab)">
+                </sq-facet-multi>
+                <sq-facet-multi #facet
+                    title="Incyte Filters" 
+                    [icon]="'fas fa-microscope'"
+                    [results]="results"
+                    [facets]="incyteFacetsVeeva"
+                    [facetComponents]="facetComponents"
+                    *ngIf="['veeva'].includes(currentSelectedTab)">
                 </sq-facet-multi>
             </sq-facet-card>
 
@@ -292,6 +300,13 @@
                         <sq-metadata *ngIf="record.treepath[0]?.startsWith('/Projects/') || record.treepath[0]?.startsWith('/Translational Science/') || record.treepath[0]?.startsWith('/DeptShares/')"
                             [record]="record"
                             [config]="incyteFileSharesMetadata"
+                            [layout]="'table'"
+                            class="small"
+                        ></sq-metadata>
+
+                        <sq-metadata *ngIf="record.treepath[0]?.startsWith('/Veeva Subhub/')"
+                            [record]="record"
+                            [config]="incyteVeevaMetadata"
                             [layout]="'table'"
                             class="small"
                         ></sq-metadata>
